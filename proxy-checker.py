@@ -8,7 +8,6 @@ import time
 
 URL = "http://google.com"
 CMD_CLEAR_TERM = "clear"
-TIMEOUT = (3.05,27)
 
 def check_proxy(proxy):
 
@@ -53,6 +52,8 @@ if len(argv) > 1:
             print_help()
         elif argv[1] in ('-f','--file','-file'):
             try:
+                TIMEOUT = input(Fore.LIGHTGREEN_EX + 'Timeout: ')
+                TIMEOUT = int(TIMEOUT)
                 file = open(argv[2])
                 proxies = list(file)
                 goods = 0
@@ -74,7 +75,7 @@ if len(argv) > 1:
                 print(Fore.LIGHTGREEN_EX + str(goods) + ' gute Proxys gefunden.')
                 print(Fore.LIGHTRED_EX + str(len(proxies) - goods) + ' Böse Proxys gefunden.')
                 time.sleep(7)
-                print(Fore.WHITE)
+                print(Fore.WHITE + 'Setze farbe zurück.')
                 os.system('clear')
                 print()
             except FileNotFoundError:
@@ -83,6 +84,8 @@ if len(argv) > 1:
                 print(Fore.LIGHTRED_EX + 'Error!\nDateiname fehlt!')
         elif argv[1] in ('-p','--proxy','-proxy'):
             try:
+                TIMEOUT = input(Fore.LIGHTGREEN_EX + 'Timeout: ')
+                TIMEOUT = int(TIMEOUT)
                 argv[2] = argv[2].split(' ')[0]
                 if check_proxy(argv[2]):
                     print(Fore.LIGHTRED_EX + 'BÖSE PROXY ' + argv[2])
